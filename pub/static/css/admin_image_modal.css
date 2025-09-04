@@ -11,8 +11,8 @@
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     padding: 8px;
-    max-width: 500px;  /* Changed from 300px */
-    max-height: 500px; /* Changed from 300px */
+    max-width: 500px;
+    max-height: 500px;
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.2s ease;
