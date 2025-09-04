@@ -1,0 +1,38 @@
+.image-title-hover {
+    cursor: pointer;
+    position: relative;
+}
+
+.image-hover-modal {
+    position: fixed;
+    z-index: 9999;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 8px;
+    max-width: 500px;
+    max-height: 500px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.image-hover-modal.show {
+    opacity: 1;
+}
+
+.image-hover-modal img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    border-radius: 4px;
+}
+
+/* Dark mode support */
+.dark .image-hover-modal {
+    background: #374151;
+    border-color: #4b5563;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}

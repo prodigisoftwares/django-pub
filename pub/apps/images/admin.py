@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 from unfold.admin import ModelAdmin as UnfoldModelAdmin
 
 from .models import Image
@@ -6,11 +7,63 @@ from .models import Image
 
 @admin.register(Image)
 class ImageAdmin(UnfoldModelAdmin):
-    list_display = ("title", "uploaded_at")
+    list_display = (
+        "get_title_with_image",
+        "uploaded_at",
+        "get_actions_column",
+    )
+
     search_fields = ("title",)
 
     class Media:
-        js = ("js/copy_image_url.js",)
+        js = (
+            "js/copy_image_url.js",
+            "js/admin_image_modal.js",
+        )
+
+        css = {"all": ("css/admin_image_modal.css",)}
+
+    def get_title_with_image(self, obj):  # pragma: no cover
+        if obj.image:
+            html = f"""
+                <span
+                  class="image-title-hover"
+                  data-image-url="{obj.image.url}"
+                >
+                    {obj.title}
+                </span>
+            """
+
+            return mark_safe(html)
+
+        return obj.title
+
+    get_title_with_image.short_description = "Title"
+
+    def get_actions_column(self, obj):  # pragma: no cover
+        if obj.image:
+            html = f"""
+                <span
+                  class="
+                    cursor-pointer text-base-400 px-3
+                    hover:text-base-700 dark:text-base-500
+                    dark:hover:text-base-200 p-1
+                    copy-url-btn
+                  "
+                  data-url="{obj.image.url}"
+                  title="Copy image URL"
+                >
+                  <span class="block material-symbols-outlined">
+                    content_copy
+                  </span>
+                </span>
+            """
+
+            return mark_safe(html)
+
+        return ""
+
+    get_actions_column.short_description = "Actions"
 
     def change_view(
         self, request, object_id, form_url="", extra_context=None
