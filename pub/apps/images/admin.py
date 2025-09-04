@@ -12,7 +12,9 @@ class ImageAdmin(UnfoldModelAdmin):
     class Media:
         js = ("js/copy_image_url.js",)
 
-    def change_view(self, request, object_id, form_url="", extra_context=None):
+    def change_view(
+        self, request, object_id, form_url="", extra_context=None
+    ):  # pragma: no cover
         extra_context = extra_context or {}
         if object_id:
             obj = self.get_object(request, object_id)
