@@ -1,15 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Handle copy functionality for both change form and list view
   function setupCopyFunctionality(button) {
     button.onclick = function() {
       let url = '';
       
-      // Check if this is a list view button (has data-url attribute)
       if (button.hasAttribute('data-url')) {
         url = button.getAttribute('data-url');
       } else {
-        // This is the change form - get URL from the file path input
         const filePathInput = document.querySelector('input[type="text"][disabled]');
+
         if (filePathInput && filePathInput.value) {
           url = filePathInput.value;
         }
@@ -28,10 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
     };
   }
 
-  // Setup copy buttons in list view
   document.querySelectorAll('.copy-url-btn').forEach(setupCopyFunctionality);
 
-  // Setup copy button in change form (existing functionality)
   if (window.location.pathname.includes('/change/')) {
     setTimeout(function() {
       const uploadLabel = document.querySelector('label[for="id_image"]');
