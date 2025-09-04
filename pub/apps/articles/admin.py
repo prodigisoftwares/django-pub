@@ -17,5 +17,8 @@ class ArticleAdmin(UnfoldModelAdmin, MarkdownxModelAdmin):
         "published_at",
     )
 
+    class Media:
+        css = {"all": ("css/markdownx_unfold.css",)}
+
 
 admin.site.register(Article, ArticleAdmin)
