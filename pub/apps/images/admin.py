@@ -16,8 +16,11 @@ class ImageAdmin(UnfoldModelAdmin):
         self, request, object_id, form_url="", extra_context=None
     ):  # pragma: no cover
         extra_context = extra_context or {}
+
         if object_id:
             obj = self.get_object(request, object_id)
+
             if obj and obj.image:
                 extra_context["image_url"] = obj.image.url
+
         return super().change_view(request, object_id, form_url, extra_context)
