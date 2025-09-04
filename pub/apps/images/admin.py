@@ -7,11 +7,38 @@ from .models import Image
 
 @admin.register(Image)
 class ImageAdmin(UnfoldModelAdmin):
-    list_display = ("title", "uploaded_at", "get_actions_column")
+    list_display = (
+        "get_title_with_image",
+        "uploaded_at",
+        "get_actions_column",
+    )
+
     search_fields = ("title",)
 
     class Media:
-        js = ("js/copy_image_url.js",)
+        js = (
+            "js/copy_image_url.js",
+            "js/admin_image_modal.js",
+        )
+
+        css = {"all": ("css/admin_image_modal.css",)}
+
+    def get_title_with_image(self, obj):
+        if obj.image:
+            html = f"""
+                <span
+                  class="image-title-hover"
+                  data-image-url="{obj.image.url}"
+                >
+                    {obj.title}
+                </span>
+            """
+
+            return mark_safe(html)
+
+        return obj.title
+
+    get_title_with_image.short_description = "Title"
 
     def get_actions_column(self, obj):  # pragma: no cover
         if obj.image:
@@ -31,7 +58,9 @@ class ImageAdmin(UnfoldModelAdmin):
                   </span>
                 </span>
             """
+
             return mark_safe(html)
+
         return ""
 
     get_actions_column.short_description = "Actions"
