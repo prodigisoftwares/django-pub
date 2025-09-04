@@ -1,12 +1,13 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
+from markdownx.models import MarkdownxField
 
 
 class Article(models.Model):
     title = models.CharField(max_length=200, unique=True)
-    content = models.TextField()
-    summary = models.TextField(blank=True)
+    content = MarkdownxField()
+    summary = MarkdownxField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(null=True, blank=True)
