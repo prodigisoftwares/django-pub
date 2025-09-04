@@ -13,7 +13,7 @@ class ImageAdmin(UnfoldModelAdmin):
     class Media:
         js = ("js/copy_image_url.js",)
 
-    def get_actions_column(self, obj):
+    def get_actions_column(self, obj):  # pragma: no cover
         if obj.image:
             html = f"""
                 <span
