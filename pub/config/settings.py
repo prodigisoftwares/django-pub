@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     "markdownx",
     "apps.articles",
     "apps.core",
+    "apps.images",
 ]
 
 MIDDLEWARE = [
