@@ -1,9 +1,10 @@
 from django.contrib import admin
+from markdownx.admin import MarkdownxModelAdmin
 
 from .models import Article
 
 
-class ArticleAdmin(admin.ModelAdmin):
+class ArticleAdmin(MarkdownxModelAdmin):
     readonly_fields = ("created_at", "updated_at", "published_at")
     fields = (
         "title",
