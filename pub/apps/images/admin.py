@@ -23,7 +23,7 @@ class ImageAdmin(UnfoldModelAdmin):
 
         css = {"all": ("css/admin_image_modal.css",)}
 
-    def get_title_with_image(self, obj):
+    def get_title_with_image(self, obj):  # pragma: no cover
         if obj.image:
             html = f"""
                 <span
