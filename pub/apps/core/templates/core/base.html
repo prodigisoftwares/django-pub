@@ -12,24 +12,7 @@
     <link rel="stylesheet" href="{% static "css/styles.css" %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.min.js"
             defer></script>
-    <script>
-        // Add custom utility for animation-delay
-        document.addEventListener('DOMContentLoaded', function () {
-          const style = document.createElement('style');
-          style.innerHTML = `
-            .animate-delay-2000 {
-              animation-delay: 2s !important;
-            }
-            .animate-delay-200 {
-              animation-delay: 0.2s !important;
-            }
-            .animate-delay-400 {
-              animation-delay: 0.4s !important;
-            }
-          `;
-          document.head.appendChild(style);
-        });
-    </script>
+    <script src="{% static "js/animation-delays.js" %}" defer></script>
   </head>
   <body class="font-sans text-gray-900 leading-relaxed">
     {% block content %}
