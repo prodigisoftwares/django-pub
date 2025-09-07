@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prodigi.us - Learn Just Enough Code to Build Your Dreams</title>
+    <meta name="description"
+          content="Practical coding insights for entrepreneurs who want to move faster, validate ideas, and avoid getting lost in the technical weeds.">
+    <meta name="keywords"
+          content="coding, entrepreneurship, MVP, startup, Django, HTMX, Alpine.js, Tailwind CSS, AI, business, web development, automation, technical skills">
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.min.js"
+            defer></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'fade-in-up': 'fade-in-up 0.6s ease-out forwards',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        'fade-in-up': {
+                            '0%': {
+                                opacity: '0',
+                                transform: 'translateY(20px)'
+                            },
+                            '100%': {
+                                opacity: '1',
+                                transform: 'translateY(0)'
+                            }
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Add custom utility for animation-delay
+        document.addEventListener('DOMContentLoaded', function () {
+          const style = document.createElement('style');
+          style.innerHTML = `
+            .animate-delay-2000 {
+              animation-delay: 2s !important;
+            }
+            .animate-delay-200 {
+              animation-delay: 0.2s !important;
+            }
+            .animate-delay-400 {
+              animation-delay: 0.4s !important;
+            }
+          `;
+          document.head.appendChild(style);
+        });
+    </script>
+  </head>
+  <body class="font-sans text-gray-900 leading-relaxed">
+    {% block content %}
+    {% endblock content %}
+    {% include "core/includes/_footer.html" %}
+  </body>
+</html>
