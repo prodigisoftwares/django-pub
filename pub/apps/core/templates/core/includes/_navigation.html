@@ -1,4 +1,3 @@
-<!-- Navigation -->
 <nav class="bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-50 border-b border-gray-100"
      x-data="{ open: false }">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -7,53 +6,9 @@
         <a href=""
            class="text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors">prodigi.us</a>
       </div>
-      <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center space-x-8">
-        <a href="#articles"
-           class="text-gray-600 hover:text-gray-900 transition-colors">Articles</a>
-        <a href="#about"
-           class="text-gray-600 hover:text-gray-900 transition-colors">Our Approach</a>
-        <a href="#services"
-           class="text-gray-600 hover:text-gray-900 transition-colors">Work with Us</a>
-        <a href="#newsletter"
-           class="bg-gradient-to-r from-gray-900 to-gray-700 text-white px-4 py-2 rounded-md hover:from-gray-800 hover:to-gray-600 transition-all duration-200 shadow-sm">
-          Stay Updated
-        </a>
-      </div>
-      <!-- Mobile menu button -->
-      <div class="md:hidden">
-        <button @click="open = !open"
-                class="text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 rounded-md p-2"
-                aria-label="Toggle menu">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
-            </path>
-            <path x-show="open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
+      {% include "core/includes/navigation/_desktop.html" %}
+      {% include "core/includes/navigation/_mobile_menu.html" %}
     </div>
-    <!-- Mobile Navigation -->
-    <div x-show="open"
-         x-transition:enter="transition ease-out duration-200"
-         x-transition:enter-start="opacity-0 transform scale-95"
-         x-transition:enter-end="opacity-100 transform scale-100"
-         x-transition:leave="transition ease-in duration-75"
-         x-transition:leave-start="opacity-100 transform scale-100"
-         x-transition:leave-end="opacity-0 transform scale-95"
-         class="md:hidden pb-4">
-      <div class="flex flex-col space-y-3">
-        <a href="#articles"
-           class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md transition-colors">Articles</a>
-        <a href="#about"
-           class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md transition-colors">Our Approach</a>
-        <a href="#services"
-           class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md transition-colors">Work with Us</a>
-        <a href="#newsletter"
-           class="bg-gradient-to-r from-gray-900 to-gray-700 text-white px-4 py-2 rounded-md hover:from-gray-800 hover:to-gray-600 transition-all duration-200 shadow-sm">
-          Stay Updated
-        </a>
-      </div>
-    </div>
+    {% include "core/includes/navigation/_mobile.html" %}
   </div>
 </nav>

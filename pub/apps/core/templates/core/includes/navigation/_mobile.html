@@ -1,0 +1,21 @@
+<div x-show="open"
+     x-transition:enter="transition ease-out duration-200"
+     x-transition:enter-start="opacity-0 transform scale-95"
+     x-transition:enter-end="opacity-100 transform scale-100"
+     x-transition:leave="transition ease-in duration-75"
+     x-transition:leave-start="opacity-100 transform scale-100"
+     x-transition:leave-end="opacity-0 transform scale-95"
+     class="md:hidden pb-4">
+  <div class="flex flex-col space-y-3">
+    <a href="#articles"
+       class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md transition-colors">Articles</a>
+    <a href="#about"
+       class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md transition-colors">Our Approach</a>
+    <a href="#services"
+       class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md transition-colors">Work with Us</a>
+    <a href="#newsletter"
+       class="bg-gradient-to-r from-gray-900 to-gray-700 text-white px-4 py-2 rounded-md hover:from-gray-800 hover:to-gray-600 transition-all duration-200 shadow-sm">
+      Stay Updated
+    </a>
+  </div>
+</div>
