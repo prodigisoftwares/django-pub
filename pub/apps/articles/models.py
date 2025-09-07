@@ -20,6 +20,7 @@ class Article(models.Model):
 
         if self.pk:
             prev = Article.objects.get(pk=self.pk)
+
             if not prev.is_published and self.is_published:
                 self.published_at = timezone.now()
             elif prev.is_published and not self.is_published:
