@@ -1,0 +1,14 @@
+<nav class="bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-50 border-b border-gray-100"
+     x-data="{ open: false }">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center py-4">
+      <div class="flex items-center">
+        <a href=""
+           class="text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors">prodigi.us</a>
+      </div>
+      {% include "core/includes/navigation/_desktop.html" %}
+      {% include "core/includes/navigation/_mobile_menu.html" %}
+    </div>
+    {% include "core/includes/navigation/_mobile.html" %}
+  </div>
+</nav>
