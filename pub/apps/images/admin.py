@@ -17,8 +17,8 @@ class ImageAdmin(UnfoldModelAdmin):
 
     class Media:
         js = (
-            "js/copy_image_url.js",
-            "js/admin_image_modal.js",
+            "js/pub/copy_image_url.js",
+            "js/pub/admin_image_modal.js",
         )
 
         css = {"all": ("css/admin_image_modal.css",)}
