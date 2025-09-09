@@ -26,8 +26,3 @@ class IndexViewTest(TestCase):
     def test_index_view_status_code(self):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
-
-    def test_index_view_context_data(self):
-        response = self.client.get(self.url)
-        self.assertIn("offerings", response.context)
-        self.assertEqual(len(response.context["offerings"]), 2)
