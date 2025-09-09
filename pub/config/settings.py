@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "markdownx",
     "apps.articles",
-    "apps.catalog",
     "apps.core",
     "apps.images",
 ]
