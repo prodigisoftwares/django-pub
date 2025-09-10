@@ -1,6 +1,9 @@
 import unittest
 from unittest.mock import Mock, patch
 
+from django.test import Client, TestCase
+from django.urls import reverse
+
 from .client import generate_answer
 
 
@@ -58,7 +61,6 @@ class TestGenerateAnswer(unittest.TestCase):
         mock_response.raise_for_status.return_value = None
         mock_post.return_value = mock_response
 
-        # Mock conversation with exchanges
         mock_conversation = Mock()
         mock_exchange1 = Mock()
         mock_exchange1.query = "What is Python?"
@@ -76,7 +78,6 @@ class TestGenerateAnswer(unittest.TestCase):
             return_value=iter([mock_exchange1, mock_exchange2])
         )
 
-        # Mock the new query chain
         mock_conversation.exchanges.select_related.return_value.prefetch_related.return_value.order_by.return_value.__getitem__ = Mock(  # noqa: E501
             return_value=mock_exchanges
         )
@@ -86,7 +87,6 @@ class TestGenerateAnswer(unittest.TestCase):
             conversation=mock_conversation,
         )
 
-        # Verify the request was made with context
         mock_post.assert_called_once()
         call_args = mock_post.call_args
         payload = call_args[1]["json"]
@@ -109,7 +109,6 @@ class TestGenerateAnswer(unittest.TestCase):
         mock_response.raise_for_status.return_value = None
         mock_post.return_value = mock_response
 
-        # Mock conversation with no exchanges
         mock_conversation = Mock()
         mock_exchanges = Mock()
         mock_exchanges.exists.return_value = False
@@ -123,7 +122,6 @@ class TestGenerateAnswer(unittest.TestCase):
             conversation=mock_conversation,
         )
 
-        # Verify no context was added
         call_args = mock_post.call_args
         payload = call_args[1]["json"]
 
@@ -140,11 +138,9 @@ class TestGenerateAnswer(unittest.TestCase):
 
         result = generate_answer("What is AI?")
 
-        # Verify no context processing attempted
         call_args = mock_post.call_args
         payload = call_args[1]["json"]
 
-        # Should only contain the base SYSTEM_PROMPT
         from apps.llm.config import SYSTEM_PROMPT
 
         self.assertEqual(payload["system"], SYSTEM_PROMPT)
@@ -162,7 +158,6 @@ class TestGenerateAnswer(unittest.TestCase):
         mock_response.raise_for_status.return_value = None
         mock_post.return_value = mock_response
 
-        # Mock conversation with single exchange
         mock_conversation = Mock()
         mock_exchange = Mock()
         mock_exchange.query = "Hello"
@@ -173,7 +168,6 @@ class TestGenerateAnswer(unittest.TestCase):
         mock_exchanges.exists.return_value = True
         mock_exchanges.__iter__ = Mock(return_value=iter([mock_exchange]))
 
-        # Mock the new query chain
         mock_conversation.exchanges.select_related.return_value.prefetch_related.return_value.order_by.return_value.__getitem__ = Mock(  # noqa: E501
             return_value=mock_exchanges
         )
@@ -183,7 +177,6 @@ class TestGenerateAnswer(unittest.TestCase):
         call_args = mock_post.call_args
         payload = call_args[1]["json"]
 
-        # Verify proper formatting with newlines
         expected_in_system = "\n\nPrevious conversation:\nUser: Hello\n\nAssistant: Hi there!\n\n"  # noqa: E501
         self.assertIn(expected_in_system, payload["system"])
 
@@ -200,7 +193,6 @@ class TestGenerateAnswer(unittest.TestCase):
             "What does this file contain?", file_content=file_content
         )
 
-        # Verify the request was made with file content
         mock_post.assert_called_once()
         call_args = mock_post.call_args
         payload = call_args[1]["json"]
@@ -223,13 +215,11 @@ class TestGenerateAnswer(unittest.TestCase):
         mock_response.raise_for_status.return_value = None
         mock_post.return_value = mock_response
 
-        # Mock conversation with exchange that has attachment
         mock_conversation = Mock()
         mock_exchange = Mock()
         mock_exchange.query = "Analyze this file"
         mock_exchange.raw_answer = "The file contains data."
 
-        # Mock attachment
         mock_attachment = Mock()
         mock_attachment.filename = "data.txt"
         mock_attachment.content = "Sample file content"
@@ -239,7 +229,6 @@ class TestGenerateAnswer(unittest.TestCase):
         mock_exchanges.exists.return_value = True
         mock_exchanges.__iter__ = Mock(return_value=iter([mock_exchange]))
 
-        # Mock the new query chain
         mock_conversation.exchanges.select_related.return_value.prefetch_related.return_value.order_by.return_value.__getitem__ = Mock(  # noqa: E501
             return_value=mock_exchanges
         )
@@ -249,10 +238,21 @@ class TestGenerateAnswer(unittest.TestCase):
             conversation=mock_conversation,
         )
 
-        # Verify the request includes attachment info
         call_args = mock_post.call_args
         payload = call_args[1]["json"]
 
         self.assertIn("[Attached file: data.txt]", payload["system"])
         self.assertIn("File content:\nSample file content", payload["system"])
         self.assertEqual(result, "Context with attachments.")
+
+
+class TestOllamaViewSimple(TestCase):
+    def test_test_ollama(self):
+        client = Client()
+        response = client.get(reverse("llm:test_ollama"))
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertIn("success", data)
+        self.assertTrue(data["success"])
+        self.assertIn("response", data)
+        self.assertIsInstance(data["response"], str)
