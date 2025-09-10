@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     "apps.catalog",
     "apps.core",
     "apps.images",
+    "apps.llm",
 ]
 
 MIDDLEWARE = [
@@ -156,3 +157,8 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Ollama LLM settings
+OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "http://localhost:11435")
+OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "llama3.2")
+OLLAMA_TIMEOUT = int(os.environ.get("OLLAMA_TIMEOUT", "30"))
