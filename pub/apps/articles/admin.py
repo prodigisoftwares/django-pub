@@ -14,6 +14,7 @@ class ArticleAdmin(UnfoldModelAdmin, MarkdownxModelAdmin):
         "updated_at",
         "is_published",
         "published_at",
+        "slug",
     )
 
     list_display = (

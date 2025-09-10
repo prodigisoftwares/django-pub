@@ -17,164 +17,41 @@
             <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm">Featured</span>
             <span class="ml-4 text-gray-300">5 min read</span>
           </div>
-          <h3 class="text-2xl lg:text-3xl font-bold mb-4 leading-tight">
-            <a href="" class="link-featured">How One Founder Built an MVP in One Weekend with Zero Coding Experience</a>
-          </h3>
-          <p class="text-lg text-gray-200 mb-6 leading-relaxed">
-            The panic hit at 2 AM on Friday. Sarah's co-founder had just quit, taking their only developer with him. The investor meeting was Monday. She had 72 hours to prove their idea could work, armed with nothing but Google and stubborn determination.
-          </p>
-          <a href=""
-             class="inline-flex items-center text-white hover:text-gray-200 font-medium transition-colors group">
-            Read the full story
-            <svg class="arrow-svg-service"
-                 fill="none"
-                 stroke="currentColor"
-                 viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-            </svg>
-          </a>
+          {% if published_articles %}
+            {% include "core/includes/_leading_article.html" %}
+          {% else %}
+            <h3 class="text-2xl lg:text-3xl font-bold mb-4 leading-tight">No articles found.</h3>
+          {% endif %}
         </div>
       </article>
     </div>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- Article Card 1 -->
-      <article class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg hover:border-gray-300 transition-all duration-200 group">
-        <div class="flex items-center text-sm text-gray-500 mb-3">
-          <time>3 days ago</time>
-          <span class="mx-2">•</span>
-          <span>7 min read</span>
+      {% for article in published_articles|slice:"1:7" %}
+        <article class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg hover:border-gray-300 transition-all duration-200 group">
+          <div class="flex items-center text-sm text-gray-500 mb-3">
+            <time>{{ article.published_at|timesince }} ago</time>
+            <span class="mx-2">•</span>
+            <span>{% widthratio article.content|wordcount 200 1 %} min read</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-gray-700 transition-colors">
+            <a href="" class="link-article">{{ article.title }}</a>
+          </h3>
+          <p class="text-gray-600 mb-4 leading-relaxed">{{ article.summary|default:article.content|truncatewords:25|safe }}</p>
+          <a href="" class="link-continue group">
+            Continue reading
+            <svg class="arrow-svg-sm"
+                 fill="none"
+                 stroke="currentColor"
+                 viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </article>
+      {% empty %}
+        <div class="col-span-full text-center text-gray-500">
+          <p>No additional articles available.</p>
         </div>
-        <h3 class="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-gray-700 transition-colors">
-          <a href="" class="link-article">The Five Lines of Code That Saved a Small Business</a>
-        </h3>
-        <p class="text-gray-600 mb-4 leading-relaxed">
-          When customers started complaining about manual invoicing delays, this business owner thought they needed expensive software. Instead, they learned just enough Python to automate the process in an afternoon.
-        </p>
-        <a href="" class="link-continue group">
-          Continue reading
-          <svg class="arrow-svg-sm"
-               fill="none"
-               stroke="currentColor"
-               viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-          </svg>
-        </a>
-      </article>
-      <!-- Article Card 2 -->
-      <article class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg hover:border-gray-300 transition-all duration-200 group">
-        <div class="flex items-center text-sm text-gray-500 mb-3">
-          <time>1 week ago</time>
-          <span class="mx-2">•</span>
-          <span>4 min read</span>
-        </div>
-        <h3 class="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-gray-700 transition-colors">
-          <a href="" class="link-article">API Integration for the Non-Technical Founder</a>
-        </h3>
-        <p class="text-gray-600 mb-4 leading-relaxed">
-          Your app needs to talk to Stripe, but your developer quoted three weeks and five thousand dollars. Here's how to connect the dots yourself in less than an hour.
-        </p>
-        <a href="" class="link-continue group">
-          Continue reading
-          <svg class="arrow-svg-sm"
-               fill="none"
-               stroke="currentColor"
-               viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-          </svg>
-        </a>
-      </article>
-      <!-- Article Card 3 -->
-      <article class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg hover:border-gray-300 transition-all duration-200 group">
-        <div class="flex items-center text-sm text-gray-500 mb-3">
-          <time>2 weeks ago</time>
-          <span class="mx-2">•</span>
-          <span>6 min read</span>
-        </div>
-        <h3 class="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-gray-700 transition-colors">
-          <a href="" class="link-article">From Spreadsheets to Web App in 48 Hours</a>
-        </h3>
-        <p class="text-gray-600 mb-4 leading-relaxed">
-          A startup team was drowning in Excel chaos. Customer data scattered across twelve different files, version control nightmares, and hours wasted on manual updates. The breaking point came when they lost a $50K deal because of a data mix-up.
-        </p>
-        <a href="" class="link-continue group">
-          Continue reading
-          <svg class="arrow-svg-sm"
-               fill="none"
-               stroke="currentColor"
-               viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-          </svg>
-        </a>
-      </article>
-      <!-- Article Card 4 -->
-      <article class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg hover:border-gray-300 transition-all duration-200 group">
-        <div class="flex items-center text-sm text-gray-500 mb-3">
-          <time>3 weeks ago</time>
-          <span class="mx-2">•</span>
-          <span>5 min read</span>
-        </div>
-        <h3 class="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-gray-700 transition-colors">
-          <a href="" class="link-article">Why AI is the Perfect Coding Assistant for Entrepreneurs</a>
-        </h3>
-        <p class="text-gray-600 mb-4 leading-relaxed">
-          You don't need to become a programmer to leverage code. Learn how AI tools can amplify your basic coding skills and help you build faster than ever before.
-        </p>
-        <a href="" class="link-continue group">
-          Continue reading
-          <svg class="arrow-svg-sm"
-               fill="none"
-               stroke="currentColor"
-               viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-          </svg>
-        </a>
-      </article>
-      <!-- Article Card 5 -->
-      <article class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg hover:border-gray-300 transition-all duration-200 group">
-        <div class="flex items-center text-sm text-gray-500 mb-3">
-          <time>1 month ago</time>
-          <span class="mx-2">•</span>
-          <span>8 min read</span>
-        </div>
-        <h3 class="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-gray-700 transition-colors">
-          <a href="" class="link-article">Database Design for Business Owners Who Hate Databases</a>
-        </h3>
-        <p class="text-gray-600 mb-4 leading-relaxed">
-          Your data is a mess, but you're not sure why. Understanding the basics of how information should be structured can save you thousands in developer costs and countless headaches.
-        </p>
-        <a href="" class="link-continue group">
-          Continue reading
-          <svg class="arrow-svg-sm"
-               fill="none"
-               stroke="currentColor"
-               viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-          </svg>
-        </a>
-      </article>
-      <!-- Article Card 6 -->
-      <article class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg hover:border-gray-300 transition-all duration-200 group">
-        <div class="flex items-center text-sm text-gray-500 mb-3">
-          <time>1 month ago</time>
-          <span class="mx-2">•</span>
-          <span>3 min read</span>
-        </div>
-        <h3 class="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-gray-700 transition-colors">
-          <a href="" class="link-article">Technical Debt: A Startup Reality Check</a>
-        </h3>
-        <p class="text-gray-600 mb-4 leading-relaxed">
-          Every shortcut you take today is a bill that comes due tomorrow. But sometimes shortcuts are exactly what you need to survive. Here's how to choose wisely.
-        </p>
-        <a href="" class="link-continue group">
-          Continue reading
-          <svg class="arrow-svg-sm"
-               fill="none"
-               stroke="currentColor"
-               viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-          </svg>
-        </a>
-      </article>
+      {% endfor %}
     </div>
     <div class="text-center mt-12">
       <a href="" class="btn-view-all group">
