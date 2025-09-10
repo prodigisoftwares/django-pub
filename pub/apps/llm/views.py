@@ -10,5 +10,5 @@ def test_ollama(request):
     try:
         response = generate_answer(test_prompt)
         return JsonResponse({"success": True, "response": response})
-    except Exception as e:
+    except Exception as e:  # pragma: no cover
         return JsonResponse({"success": False, "error": str(e)}, status=500)
