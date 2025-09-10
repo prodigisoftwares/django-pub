@@ -1,3 +1,14 @@
-# from django.shortcuts import render
+from django.http import JsonResponse
 
-# Create your views here.
+from .client import generate_answer
+
+
+def test_ollama(request):
+    """Test endpoint for Ollama integration"""
+    test_prompt = "Hello, please respond with just 'Docker Ollama working!'"
+
+    try:
+        response = generate_answer(test_prompt)
+        return JsonResponse({"success": True, "response": response})
+    except Exception as e:
+        return JsonResponse({"success": False, "error": str(e)}, status=500)
