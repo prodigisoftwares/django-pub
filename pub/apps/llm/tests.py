@@ -11,7 +11,7 @@ class TestGenerateAnswer(unittest.TestCase):
     def test_empty_prompt(self):
         self.assertEqual(generate_answer(""), "")
 
-    @patch("apps.llm.client.requests.post")
+    @patch("apps.llm.utils.request.requests.post")
     def test_successful_response(self, mock_post):
         mock_response = Mock()
         mock_response.json.return_value = {"response": "Test answer."}
@@ -21,7 +21,7 @@ class TestGenerateAnswer(unittest.TestCase):
         self.assertEqual(result, "Test answer.")
 
     @patch(
-        "apps.llm.client.requests.post",
+        "apps.llm.utils.request.requests.post",
         side_effect=Exception("Something went wrong"),
     )
     def test_generic_exception(self, mock_post):
@@ -29,27 +29,27 @@ class TestGenerateAnswer(unittest.TestCase):
         self.assertTrue(result.startswith("LLM error:"))
 
     @patch(
-        "apps.llm.client.requests.post",
+        "apps.llm.utils.request.requests.post",
         side_effect=Exception("Timeout"),
     )
     def test_timeout_exception(self, mock_post):
         # Simulate Timeout exception
         with patch(
-            "apps.llm.client.requests.post",
+            "apps.llm.utils.request.requests.post",
             side_effect=Exception("Timeout"),
         ):
             result = generate_answer("Test")
             self.assertTrue(result.startswith("LLM error:"))
 
     @patch(
-        "apps.llm.client.requests.post",
+        "apps.llm.utils.request.requests.post",
         side_effect=ConnectionError(),
     )
     def test_connection_error(self, mock_post):
         result = generate_answer("Test")
         self.assertIn("LLM error:", result)
 
-    @patch("apps.llm.client.requests.post")
+    @patch("apps.llm.utils.request.requests.post")
     def test_with_conversation_context(self, mock_post):
         """
         Test that conversation context is properly formatted and included.
@@ -99,7 +99,7 @@ class TestGenerateAnswer(unittest.TestCase):
         )
         self.assertEqual(result, "Context-aware answer.")
 
-    @patch("apps.llm.client.requests.post")
+    @patch("apps.llm.utils.request.requests.post")
     def test_conversation_without_exchanges(self, mock_post):
         """Test that empty conversation doesn't add context."""
         mock_response = Mock()
@@ -128,7 +128,7 @@ class TestGenerateAnswer(unittest.TestCase):
         self.assertNotIn("Previous conversation:", payload["system"])
         self.assertEqual(result, "No context answer.")
 
-    @patch("apps.llm.client.requests.post")
+    @patch("apps.llm.utils.request.requests.post")
     def test_no_conversation_parameter(self, mock_post):
         """Test that function works without conversation parameter."""
         mock_response = Mock()
@@ -150,7 +150,7 @@ class TestGenerateAnswer(unittest.TestCase):
         )
         self.assertEqual(result, "Simple answer.")
 
-    @patch("apps.llm.client.requests.post")
+    @patch("apps.llm.utils.request.requests.post")
     def test_context_formatting(self, mock_post):
         """Test that context is formatted correctly with proper spacing."""
         mock_response = Mock()
@@ -180,7 +180,7 @@ class TestGenerateAnswer(unittest.TestCase):
         expected_in_system = "\n\nPrevious conversation:\nUser: Hello\n\nAssistant: Hi there!\n\n"  # noqa: E501
         self.assertIn(expected_in_system, payload["system"])
 
-    @patch("apps.llm.client.requests.post")
+    @patch("apps.llm.utils.request.requests.post")
     def test_with_file_content(self, mock_post):
         """Test that file content is properly included in prompt."""
         mock_response = Mock()
@@ -205,7 +205,7 @@ class TestGenerateAnswer(unittest.TestCase):
         self.assertIn(file_content, payload["prompt"])
         self.assertEqual(result, "File-aware answer.")
 
-    @patch("apps.llm.client.requests.post")
+    @patch("apps.llm.utils.request.requests.post")
     def test_with_conversation_and_attachments(self, mock_post):
         """Test that conversation context includes attachment information."""
         mock_response = Mock()
