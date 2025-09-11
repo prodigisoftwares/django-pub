@@ -1,7 +1,8 @@
 from django.db import models
-from django.utils import timezone
 from django.utils.text import slugify
 from markdownx.models import MarkdownxField
+
+from .utils.publishing import set_published_at
 
 
 class Article(models.Model):
@@ -18,18 +19,12 @@ class Article(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
 
+        # Handle published_at logic
         if self.pk:
             prev = Article.objects.get(pk=self.pk)
-
-            if not prev.is_published and self.is_published:
-                self.published_at = timezone.now()
-            elif prev.is_published and not self.is_published:
-                self.published_at = None
+            set_published_at(model=self, prev_instance=prev)
         else:
-            if self.is_published and not self.published_at:
-                self.published_at = timezone.now()
-            elif not self.is_published:
-                self.published_at = None
+            set_published_at(model=self)
 
         super().save(*args, **kwargs)
 
