@@ -1,5 +1,22 @@
+from unittest.mock import patch
+
 from django.test import Client, TestCase
 from django.urls import reverse
+
+from ..client import generate_answer
+
+
+class GenerateAnswerTest(TestCase):
+    def test_generate_answer_returns_expected(self):
+        prompt = "What is Django?"
+        expected = "Django is a web framework."
+        with patch(
+            "apps.llm.client.post_prompt",
+            return_value=expected,
+        ) as mock_post:
+            result = generate_answer(prompt)
+            mock_post.assert_called_once()
+            self.assertEqual(result, expected)
 
 
 class TestOllamaViewSimple(TestCase):
