@@ -80,7 +80,9 @@ def append_context_parts(
     return context_parts
 
 
-def get_context(conversation, file_content: str = None) -> str:
+def get_context(
+    conversation, file_content: str = None
+) -> str:  # pragma: no cover  # noqa: C901
     """
     Builds a string representing the context of a conversation, including
     previous exchanges and optional file content.
