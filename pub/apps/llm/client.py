@@ -4,7 +4,7 @@
 from django.conf import settings
 
 from .config import SYSTEM_PROMPT
-from .utils.context import add_file_context, append_context_parts
+from .utils.context import add_file_context, get_context
 from .utils.request import post_prompt
 
 OLLAMA_HOST = settings.OLLAMA_HOST
@@ -16,28 +16,24 @@ def generate_answer(
     conversation=None,
     file_content: str = None,
 ) -> str:
+    """
+    Generates an answer from a local LLM using the Ollama API, optionally
+    including conversation history and file content for context.
+
+    Args:
+        prompt (str): The user's current query or prompt.
+        conversation (optional): The conversation object containing
+        previous exchanges (default: None).
+        file_content (str, optional): Additional file content to provide
+        as context (default: None).
+
+    Returns:
+        str: The generated answer from the LLM as a plain string.
+    """
     if not prompt:
         return ""
 
-    context = ""
-
-    if conversation:
-        previous_exchanges: list = (
-            conversation.exchanges.select_related()
-            .prefetch_related("attachments")
-            .order_by("created_at")[:10]
-        )
-
-        if previous_exchanges.exists():
-            context_parts = []
-
-            for exchange in previous_exchanges:
-                context_parts = append_context_parts(
-                    context_parts, exchange, file_content
-                )
-
-            context = "\n\n".join(context_parts) + "\n\n"
-
+    context = get_context(conversation, file_content) or ""
     full_prompt = SYSTEM_PROMPT
 
     if context:
