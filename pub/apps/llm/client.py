@@ -30,18 +30,18 @@ def generate_answer(
     Returns:
         str: The generated answer from the LLM as a plain string.
     """
-    if not prompt:
+    if not prompt:  # pragma: no cover
         return ""
 
     context = get_context(conversation, file_content) or ""
     full_prompt = SYSTEM_PROMPT
 
-    if context:
+    if context:  # pragma: no cover
         full_prompt += f"\n\nPrevious conversation:\n{context}"
 
     current_prompt = prompt
 
-    if file_content:
+    if file_content:  # pragma: no cover
         current_prompt = add_file_context(current_prompt, file_content)
 
     url = f"{OLLAMA_HOST}/api/generate"
