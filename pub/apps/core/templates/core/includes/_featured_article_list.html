@@ -1,14 +1,11 @@
 {% for article in articles|slice:"1:7" %}
   <article class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg hover:border-gray-300 transition-all duration-200 group">
     <div class="flex items-center text-sm text-gray-500 mb-3">
-      <time>{{ article.published_at|timesince }} ago</time>
+      {% include "articles/time_ago_published.html" with instance=article %}
       <span class="mx-2">•</span>
-      <span>{% widthratio article.content|wordcount 200 1 %} min read</span>
+      <span>{% include "core/shared/reading_length.html" with instance=article %}</span>
     </div>
-    <h3 class="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-gray-700 transition-colors">
-      <a href="" class="link-article">{{ article.title }}</a>
-    </h3>
-    <p class="text-gray-600 mb-4 leading-relaxed">{{ article.summary|default:article.content|truncatewords:25|safe }}</p>
+    {% include "articles/article_listing.html" with article=article article_heading_class="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-gray-700 transition-colors" article_link_class="link-article" article_summary_class="text-gray-600 mb-4 leading-relaxed" %}
     <a href="" class="link-continue group">
       Continue reading
       <svg class="arrow-svg-sm"

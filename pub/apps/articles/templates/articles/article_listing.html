@@ -1,0 +1,6 @@
+<h3 class="{{ article_heading_class }}">
+  <a href="" class="{{ article_link_class }}">{{ article.title }}</a>
+</h3>
+<p class={{ article_summary_class }}">
+  {{ article.summary|default:article.content|truncatewords:25|safe }}
+</p>
