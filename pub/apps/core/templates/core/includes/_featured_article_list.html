@@ -2,7 +2,8 @@
   <article class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg hover:border-gray-300 transition-all duration-200 group">
     {% include "core/includes/_article_metadata.html" with article=article extra_classes="mb-3" %}
     {% include "articles/article_listing.html" with article=article article_heading_class="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-gray-700 transition-colors" article_link_class="link-article" article_summary_class="text-gray-600 mb-4 leading-relaxed" %}
-    <a href="" class="link-continue group">
+    <a href="{% url "core:article" article.slug %}"
+       class="link-continue group">
       Continue reading
       <svg class="arrow-svg-sm"
            fill="none"
