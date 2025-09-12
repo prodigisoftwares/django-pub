@@ -18,10 +18,8 @@ def markdownify_filter(text):
     if not text:
         return ""
 
-    # Use markdownx's built-in markdownify function to convert markdown to HTML
     html_content = markdownify(text)
 
-    # Mark as safe so Django doesn't escape the HTML
     return mark_safe(html_content)
 
 
@@ -33,10 +31,8 @@ def markdownify_summary_filter(text):
     if not text:
         return ""
 
-    # Use markdownx's built-in markdownify function
     html_content = markdownify(text)
 
-    # Mark as safe so Django doesn't escape the HTML
     return mark_safe(html_content)
 
 
@@ -49,13 +45,8 @@ def markdown_to_text_filter(text):
     if not text:
         return ""
 
-    # Convert markdown to HTML first
     html_content = markdownify(text)
-
-    # Strip all HTML tags to get plain text
     plain_text = strip_tags(html_content)
-
-    # Clean up extra whitespace and newlines
     clean_text = re.sub(r"\s+", " ", plain_text).strip()
 
     return clean_text
