@@ -1,5 +1,6 @@
 {% extends "core/base.html" %}
 {% load static %}
+{% load markdown_extras %}
 {% block content %}
   <article class="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
     <!-- Hero Section -->
@@ -31,7 +32,9 @@
         <h1 class="text-4xl lg:text-5xl font-bold mb-8 leading-tight animate-fade-in-up">{{ article.title }}</h1>
         <!-- Article Summary -->
         {% if article.summary %}
-          <div class="text-xl text-gray-200 leading-relaxed mb-8 max-w-3xl animate-fade-in-up">{{ article.summary|safe }}</div>
+          <div class="text-xl text-gray-200 leading-relaxed mb-8 max-w-3xl animate-fade-in-up">
+            {{ article.summary|markdownify_summary }}
+          </div>
         {% endif %}
         <!-- Scroll Indicator -->
         <div class="flex items-center text-gray-300 text-sm animate-fade-in-up">
@@ -49,7 +52,7 @@
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div class="bg-white rounded-2xl shadow-lg p-8 lg:p-12 animate-fade-in-up">
         <!-- Content Section -->
-        <div class="prose prose-lg prose-gray max-w-none">{{ article.content|safe }}</div>
+        <div class="prose prose-lg prose-gray max-w-none">{{ article.content|markdownify }}</div>
       </div>
     </div>
     <!-- Article Footer & Navigation -->

@@ -67,39 +67,72 @@
 .prose h1 { @apply text-3xl lg:text-4xl; }
 .prose h2 { @apply text-2xl lg:text-3xl; }
 .prose h3 { @apply text-xl lg:text-2xl; }
+.prose h4 { @apply text-lg lg:text-xl; }
+.prose h5 { @apply text-base lg:text-lg; }
+.prose h6 { @apply text-sm lg:text-base; }
+
 .prose p {
-  @apply text-gray-700 leading-relaxed mb-6;
+  @apply text-gray-700 leading-relaxed mb-6 text-base lg:text-lg;
 }
 .prose a {
-  @apply text-blue-600 hover:text-blue-800 font-medium transition-colors;
+  @apply text-blue-600 hover:text-blue-800 font-medium transition-colors underline underline-offset-2 hover:underline-offset-4;
 }
 .prose blockquote {
-  @apply border-l-4 border-gray-300 pl-6 py-2 bg-gray-50 rounded-r-lg italic text-gray-600 my-8;
+  @apply border-l-4 border-blue-300 pl-6 py-4 bg-blue-50 rounded-r-lg italic text-gray-700 my-8 font-medium;
 }
 .prose code {
-  @apply bg-gray-100 px-2 py-1 rounded text-sm font-mono text-gray-800;
+  @apply bg-gray-100 px-2 py-1 rounded text-sm font-mono text-gray-800 border border-gray-200;
 }
 .prose pre {
-  @apply bg-gray-900 text-white p-6 rounded-lg overflow-x-auto my-8;
+  @apply bg-gray-900 text-white p-6 rounded-lg overflow-x-auto my-8 shadow-md;
 }
 .prose pre code {
-  @apply bg-transparent px-0 py-0 text-white;
+  @apply bg-transparent px-0 py-0 text-white border-none;
 }
 .prose ul, .prose ol {
-  @apply my-6 space-y-2;
+  @apply my-6 space-y-2 pl-6;
+}
+.prose ul {
+  @apply list-disc;
+}
+.prose ol {
+  @apply list-decimal;
 }
 .prose li {
-  @apply text-gray-700 leading-relaxed;
+  @apply text-gray-700 leading-relaxed text-base lg:text-lg;
 }
 .prose img {
-  @apply rounded-lg shadow-md mx-auto my-8;
+  @apply rounded-lg shadow-md mx-auto my-8 border border-gray-100;
 }
 .prose table {
-  @apply w-full border-collapse my-8;
+  @apply w-full border-collapse my-8 shadow-sm rounded-lg overflow-hidden;
 }
 .prose th, .prose td {
-  @apply border border-gray-200 p-3 text-left;
+  @apply border border-gray-200 p-4 text-left;
 }
 .prose th {
   @apply bg-gray-50 font-semibold text-gray-900;
+}
+.prose td {
+  @apply text-gray-700;
+}
+.prose strong, .prose b {
+  @apply font-semibold text-gray-900;
+}
+.prose em, .prose i {
+  @apply italic;
+}
+.prose hr {
+  @apply border-gray-200 my-8;
+}
+
+/* Additional prose enhancements for better readability */
+.prose h1:first-child,
+.prose h2:first-child,
+.prose h3:first-child {
+  @apply mt-0;
+}
+
+.prose > *:last-child {
+  @apply mb-0;
 }
