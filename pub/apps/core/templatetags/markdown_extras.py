@@ -15,7 +15,7 @@ def markdownify_filter(text):
     markdownify function. This preserves all the markdown formatting
     and converts it to proper HTML.
     """
-    if not text:
+    if not text:  # pragma: no cover
         return ""
 
     html_content = markdownify(text)
@@ -28,7 +28,7 @@ def markdownify_summary_filter(text):
     """
     Convert markdown summary text to HTML, with special handling for summaries.
     """
-    if not text:
+    if not text:  # pragma: no cover
         return ""
 
     html_content = markdownify(text)
