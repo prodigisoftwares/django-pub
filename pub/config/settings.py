@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     "markdownx",
     "apps.articles",
     "apps.catalog",
+    "apps.comments",
     "apps.core",
     "apps.images",
     "apps.llm",
