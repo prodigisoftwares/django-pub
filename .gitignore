@@ -12,3 +12,4 @@ requirements.txt
 pub/requirements.txt
 *.sqlite3
 .idea/
+tmp/
