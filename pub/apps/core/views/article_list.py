@@ -49,6 +49,9 @@ class ArticleListView(TemplateView):
         self, request, articles_queryset, default_page=2
     ) -> Paginator.page:
         page_number = request.GET.get("page", default_page)
+        # Ensure queryset is ordered to avoid UnorderedObjectListWarning
+        if not getattr(articles_queryset, "ordered", False):
+            articles_queryset = articles_queryset.order_by("pk")
         paginator = Paginator(articles_queryset, self.paginate_by)
 
         try:
