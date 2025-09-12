@@ -1,4 +1,5 @@
 {% load static %}
+{% load markdown_extras %}
 {% for article in articles %}
   <article class="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg hover:border-gray-300 transition-all duration-300 group animate-fade-in-up"
            style="animation-delay: {{ forloop.counter0|add:1|floatformat:0 }}00ms">
@@ -6,8 +7,11 @@
     <h3 class="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-gray-700 transition-colors">
       <a href="" class="link-article">{{ article.title }}</a>
     </h3>
-    <p class="text-gray-600 mb-6 leading-relaxed">{{ article.summary|default:article.content|truncatewords:20|safe }}</p>
-    <a href="" class="link-continue group">
+    <p class="text-gray-600 mb-6 leading-relaxed">
+      {{ article.summary|default:article.content|markdown_to_text|truncatewords:20 }}
+    </p>
+    <a href="{% url "core:article" article.slug %}"
+       class="link-continue group">
       Continue reading
       <svg class="arrow-svg-sm ml-1 group-hover:translate-x-1 transition-transform"
            fill="none"

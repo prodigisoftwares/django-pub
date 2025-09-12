@@ -2,60 +2,205 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom Link Components */
 @layer components {
+  /* ==========================================================================
+     BUTTON COMPONENTS
+     ========================================================================== */
+  
   /* Primary CTA Button - Dark gradient with arrow */
   .btn-primary-cta {
-    @apply bg-gradient-to-r from-gray-900 to-gray-700 text-white px-8 py-4 rounded-lg text-lg font-medium hover:from-gray-800 hover:to-gray-600 inline-flex items-center shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-500;
+    @apply bg-gradient-to-r from-gray-900 to-gray-700 text-white 
+           px-8 py-4 rounded-lg text-lg font-medium 
+           hover:from-gray-800 hover:to-gray-600 
+           inline-flex items-center shadow-lg hover:shadow-xl 
+           transform hover:scale-105 active:scale-95 
+           focus:outline-none focus:ring-2 focus:ring-gray-300 
+           transition duration-500;
   }
   
   /* Secondary CTA Button - Light hover effect */
   .btn-secondary-cta {
-    @apply text-gray-600 hover:text-gray-900 px-8 py-4 text-lg font-medium hover:bg-gray-50 rounded-lg transform active:scale-95 focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-500;
-  }
-  
-  /* Article Link - Standard article links with hover effects */
-  .link-article {
-    @apply hover:text-gray-700 transform active:scale-95 focus:outline-none focus:ring-2 focus:ring-gray-300 shadow-sm hover:shadow-md transition duration-500;
-  }
-  
-  /* Service Link - For service buttons with enhanced styling */
-  .link-service {
-    @apply inline-flex items-center text-gray-900 hover:text-gray-700 font-medium hover:bg-gray-50 px-4 py-2 rounded-lg transform transition-transform duration-500 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gray-300 shadow-sm hover:shadow-md;
+    @apply text-gray-600 hover:text-gray-900 
+           px-8 py-4 text-lg font-medium 
+           hover:bg-gray-50 rounded-lg 
+           transform active:scale-95 
+           focus:outline-none focus:ring-2 focus:ring-gray-300 
+           transition duration-500;
   }
   
   /* View All Button - For "View All" style buttons */
   .btn-view-all {
-    @apply inline-flex items-center text-gray-900 hover:text-gray-700 font-medium text-lg hover:bg-gray-50 px-6 py-3 rounded-lg transform active:scale-95 focus:outline-none focus:ring-2 focus:ring-gray-300 shadow-sm hover:shadow-md transition duration-500;
+    @apply inline-flex items-center text-gray-900 hover:text-gray-700 
+           font-medium text-lg px-6 py-3 rounded-lg 
+           hover:bg-gray-50 shadow-sm hover:shadow-md 
+           transform active:scale-95 
+           focus:outline-none focus:ring-2 focus:ring-gray-300 
+           transition duration-500;
   }
+
+  /* ==========================================================================
+     LINK COMPONENTS
+     ========================================================================== */
   
-  /* Footer Link - Simple footer link styling */
-  .link-footer {
-    @apply text-gray-600 hover:text-gray-900 transform active:scale-95 focus:outline-none focus:ring-2 focus:ring-gray-300 shadow-sm hover:shadow-md transition duration-500;
-  }
-  
-  /* Continue Reading Link - For inline article continuation links */
-  .link-continue {
-    @apply text-gray-900 hover:text-gray-700 font-medium inline-flex items-center transition-colors;
+  /* Article Link - Standard article links with hover effects */
+  .link-article {
+    @apply hover:text-gray-700 shadow-sm hover:shadow-md 
+           transform active:scale-95 
+           focus:outline-none focus:ring-2 focus:ring-gray-300 
+           transition duration-500;
   }
   
   /* Featured Article Link - For featured article links */
   .link-featured {
-    @apply hover:text-gray-200 transform active:scale-95 focus:outline-none focus:ring-2 focus:ring-gray-300 shadow-sm hover:shadow-md transition duration-500;
+    @apply hover:text-gray-200 shadow-sm hover:shadow-md 
+           transform active:scale-95 
+           focus:outline-none focus:ring-2 focus:ring-gray-300 
+           transition duration-500;
   }
   
-  /* Arrow SVG - Standard arrow styling */
+  /* Continue Reading Link - For inline article continuation links */
+  .link-continue {
+    @apply text-gray-900 hover:text-gray-700 
+           font-medium inline-flex items-center 
+           transition-colors;
+  }
+  
+  /* Service Link - For service buttons with enhanced styling */
+  .link-service {
+    @apply inline-flex items-center text-gray-900 hover:text-gray-700 
+           font-medium px-4 py-2 rounded-lg 
+           hover:bg-gray-50 shadow-sm hover:shadow-md 
+           transform active:scale-95 transition-transform duration-500 
+           focus:outline-none focus:ring-2 focus:ring-gray-300;
+  }
+  
+  /* Footer Link - Simple footer link styling */
+  .link-footer {
+    @apply text-gray-600 hover:text-gray-900 
+           shadow-sm hover:shadow-md 
+           transform active:scale-95 
+           focus:outline-none focus:ring-2 focus:ring-gray-300 
+           transition duration-500;
+  }
+
+  /* ==========================================================================
+     ARROW UTILITIES
+     ========================================================================== */
+  
+  /* Standard Arrow SVG */
   .arrow-svg {
-    @apply ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-500;
+    @apply ml-2 w-5 h-5 
+           transform group-hover:translate-x-1 
+           transition-transform duration-500;
   }
   
-  /* Small Arrow SVG - For smaller arrows */
+  /* Small Arrow SVG */
   .arrow-svg-sm {
-    @apply ml-1 w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-500;
+    @apply ml-1 w-4 h-4 
+           transform group-hover:translate-x-1 
+           transition-transform duration-500;
   }
   
-  /* Service Arrow SVG - For service links */
+  /* Service Arrow SVG */
   .arrow-svg-service {
-    @apply ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-500;
+    @apply ml-2 w-4 h-4 
+           transform group-hover:translate-x-1 
+           transition-transform duration-500;
   }
+}
+
+/* ==========================================================================
+   PROSE TYPOGRAPHY STYLES
+   ========================================================================== */
+
+/* Headings */
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  @apply font-bold text-gray-900 mb-4 mt-8;
+}
+.prose h1 { @apply text-3xl lg:text-4xl; }
+.prose h2 { @apply text-2xl lg:text-3xl; }
+.prose h3 { @apply text-xl lg:text-2xl; }
+.prose h4 { @apply text-lg lg:text-xl; }
+.prose h5 { @apply text-base lg:text-lg; }
+.prose h6 { @apply text-sm lg:text-base; }
+
+/* Body Text */
+.prose p {
+  @apply text-gray-700 leading-relaxed mb-6 text-base lg:text-lg;
+}
+
+/* Links */
+.prose a {
+  @apply text-blue-600 hover:text-blue-800 font-medium 
+         transition-colors underline underline-offset-2 hover:underline-offset-4;
+}
+
+/* Text Formatting */
+.prose strong, .prose b {
+  @apply font-semibold text-gray-900;
+}
+.prose em, .prose i {
+  @apply italic;
+}
+
+/* Quotes and Code */
+.prose blockquote {
+  @apply border-l-4 border-blue-300 pl-6 py-4 bg-blue-50 rounded-r-lg 
+         italic text-gray-700 my-8 font-medium;
+}
+.prose code {
+  @apply bg-gray-100 px-2 py-1 rounded text-sm font-mono text-gray-800 
+         border border-gray-200;
+}
+.prose pre {
+  @apply bg-gray-900 text-white p-6 rounded-lg overflow-x-auto my-8 shadow-md;
+}
+.prose pre code {
+  @apply bg-transparent px-0 py-0 text-white border-none;
+}
+
+/* Lists */
+.prose ul, .prose ol {
+  @apply my-6 space-y-2 pl-6;
+}
+.prose ul {
+  @apply list-disc;
+}
+.prose ol {
+  @apply list-decimal;
+}
+.prose li {
+  @apply text-gray-700 leading-relaxed text-base lg:text-lg;
+}
+
+/* Media and Tables */
+.prose img {
+  @apply rounded-lg shadow-md mx-auto my-8 border border-gray-100;
+}
+.prose table {
+  @apply w-full border-collapse my-8 shadow-sm rounded-lg overflow-hidden;
+}
+.prose th, .prose td {
+  @apply border border-gray-200 p-4 text-left;
+}
+.prose th {
+  @apply bg-gray-50 font-semibold text-gray-900;
+}
+.prose td {
+  @apply text-gray-700;
+}
+
+/* Dividers */
+.prose hr {
+  @apply border-gray-200 my-8;
+}
+
+/* Layout Refinements */
+.prose h1:first-child,
+.prose h2:first-child,
+.prose h3:first-child {
+  @apply mt-0;
+}
+.prose > *:last-child {
+  @apply mb-0;
 }
