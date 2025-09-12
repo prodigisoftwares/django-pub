@@ -57,28 +57,5 @@
       {% endif %}
     </div>
   </section>
-  <script>
-    // Show loading indicator when HTMX request starts
-    document.body.addEventListener('htmx:beforeRequest', function(evt) {
-      document.getElementById('loading-indicator').classList.remove('hidden');
-    });
-
-    // Hide loading indicator when HTMX request completes
-    document.body.addEventListener('htmx:afterRequest', function(evt) {
-      document.getElementById('loading-indicator').classList.add('hidden');
-    });
-
-    // Handle successful infinite scroll load
-    document.body.addEventListener('htmx:afterSwap', function(evt) {
-      // Restart animations for newly loaded content
-      const newElements = evt.detail.target.querySelectorAll('.animate-fade-in-up');
-      newElements.forEach((el, index) => {
-        el.style.animationDelay = `${(index + 1) * 100}ms`;
-        el.classList.remove('animate-fade-in-up');
-        // Force reflow
-        el.offsetHeight;
-        el.classList.add('animate-fade-in-up');
-      });
-    });
-  </script>
+  <script src="{% static 'js/infinite-scroll.js' %}"></script>
 {% endblock content %}
