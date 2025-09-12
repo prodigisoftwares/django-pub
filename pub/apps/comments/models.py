@@ -13,7 +13,6 @@ class Comment(models.Model):
     content = models.TextField(validators=[MinLengthValidator(3)])
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
     is_approved = models.BooleanField(default=True)
     is_flagged = models.BooleanField(default=False)
 
