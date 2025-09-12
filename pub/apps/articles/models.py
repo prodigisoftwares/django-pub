@@ -14,6 +14,7 @@ class Article(models.Model):
     published_at = models.DateTimeField(null=True, blank=True)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     is_published = models.BooleanField(default=False)
+    comments = models.ManyToManyField('comments.Comment', blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
