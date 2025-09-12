@@ -53,7 +53,7 @@ class ArticleListView(TemplateView):
 
         try:
             page_obj = paginator.get_page(page_number)
-        except (EmptyPage, PageNotAnInteger):
+        except (EmptyPage, PageNotAnInteger):  # pragma: no cover
             page_obj = paginator.get_page(1)
 
         return page_obj
