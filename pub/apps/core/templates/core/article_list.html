@@ -14,38 +14,7 @@
         <div class="grid gap-8 lg:gap-10">
           {% if featured_article %}
             <!-- Featured Article (First Article) -->
-            <article class="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 rounded-2xl p-8 lg:p-12 text-white relative overflow-hidden group mb-12 animate-fade-in-up">
-              <div class="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              </div>
-              <div class="relative z-10">
-                <div class="flex items-center mb-6">
-                  <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
-                    Featured Article
-                  </span>
-                  <span class="ml-4 text-gray-300 flex items-center">
-                    {% include "articles/time_ago_published.html" with instance=featured_article %}
-                    <span class="mx-2">•</span>
-                    {% include "core/shared/reading_length.html" with instance=featured_article %}
-                  </span>
-                </div>
-                <h2 class="text-3xl lg:text-4xl font-bold mb-6 leading-tight">
-                  <a href="" class="link-featured hover:text-gray-200 transition-colors">{{ featured_article.title }}</a>
-                </h2>
-                <p class="text-xl text-gray-200 mb-8 leading-relaxed">
-                  {{ featured_article.summary|default:featured_article.content|truncatewords:30|safe }}
-                </p>
-                <a href=""
-                   class="btn-view-all bg-white/10 text-white border border-white/20 hover:bg-white/20 group">
-                  Read Full Article
-                  <svg class="arrow-svg ml-2"
-                       fill="none"
-                       stroke="currentColor"
-                       viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                  </svg>
-                </a>
-              </div>
-            </article>
+            {% include "core/includes/_featured_article_card.html" with article=featured_article show_metadata=True extra_classes="mb-12 animate-fade-in-up" %}
           {% endif %}
           <!-- Regular Articles Grid Container -->
           <div id="articles-container"

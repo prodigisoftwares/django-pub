@@ -2,11 +2,7 @@
 {% for article in articles %}
   <article class="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg hover:border-gray-300 transition-all duration-300 group animate-fade-in-up"
            style="animation-delay: {{ forloop.counter0|add:1|floatformat:0 }}00ms">
-    <div class="flex items-center text-sm text-gray-500 mb-4">
-      {% include "articles/time_ago_published.html" with instance=article %}
-      <span class="mx-2">•</span>
-      <span>{% include "core/shared/reading_length.html" with instance=article %}</span>
-    </div>
+    {% include "core/includes/_article_metadata.html" with article=article extra_classes="mb-4" %}
     <h3 class="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-gray-700 transition-colors">
       <a href="" class="link-article">{{ article.title }}</a>
     </h3>
