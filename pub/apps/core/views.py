@@ -24,7 +24,6 @@ class ArticleListView(TemplateView):
     paginate_by = 9
 
     def get(self, request, *args, **kwargs):
-        # Handle HTMX requests for infinite scroll
         if request.headers.get("HX-Request"):
             return self.get_htmx_response(request)
         return super().get(request, *args, **kwargs)
