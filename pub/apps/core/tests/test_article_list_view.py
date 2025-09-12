@@ -53,7 +53,6 @@ class ArticleListViewTests(TestCase):
         self.assertIn("articles", context)
         self.assertIn("has_next", context)
         self.assertIn("next_page_number", context)
-        # self.assertIn("featured_article", context)
 
     def test_paginate_articles_returns_page(self):
         view = ArticleListView()
