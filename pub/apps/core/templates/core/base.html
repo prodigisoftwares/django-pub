@@ -15,6 +15,7 @@
     <script src="{% static "js/pub/animation-delays.js" %}" defer></script>
   </head>
   <body class="font-sans text-gray-900 leading-relaxed">
+    {% include "core/includes/_navigation.html" %}
     {% block content %}
     {% endblock content %}
     {% include "core/includes/_footer.html" %}
