@@ -1,6 +1,6 @@
 // Custom utility for animation-delay classes
-document.addEventListener('DOMContentLoaded', function () {
-  const style = document.createElement('style');
+document.addEventListener("DOMContentLoaded", function () {
+  const style = document.createElement("style");
   style.innerHTML = `
     .animate-delay-2000 {
       animation-delay: 2s !important;

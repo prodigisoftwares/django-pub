@@ -7,7 +7,9 @@ User = get_user_model()
 
 class Comment(models.Model):
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='comments',
+        User,
+        on_delete=models.CASCADE,
+        related_name="comments",
     )
 
     content = models.TextField(validators=[MinLengthValidator(3)])
@@ -17,29 +19,25 @@ class Comment(models.Model):
     is_flagged = models.BooleanField(default=False)
 
     parent = models.ForeignKey(
-        'self',
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-        related_name='replies'
+        "self", on_delete=models.CASCADE, null=True, blank=True, related_name="replies"
     )
 
     ip_address = models.GenericIPAddressField(null=True, blank=True)
     user_agent = models.TextField(blank=True)
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ["-created_at"]
         indexes = [
-            models.Index(fields=['author']),
-            models.Index(fields=['created_at']),
-            models.Index(fields=['is_approved']),
+            models.Index(fields=["author"]),
+            models.Index(fields=["created_at"]),
+            models.Index(fields=["is_approved"]),
         ]
 
     def __str__(self):
-        return f'Comment by {self.author}'
+        return f"Comment by {self.author}"
 
     def get_replies(self):
-        return self.replies.filter(is_approved=True).order_by('created_at')
+        return self.replies.filter(is_approved=True).order_by("created_at")
 
     @property
     def is_reply(self):

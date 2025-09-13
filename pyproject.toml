@@ -31,4 +31,27 @@ pip-tools = "^7.5.0"
 poetry = "^2.1.4"
 poetry-plugin-export = "^1.9.0"
 pre-commit = "^4.3.0"
+djlint = "^1.36.4"
+
+[tool.black]
+line-length = 88
+target-version = ['py312']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+  | migrations
+)/
+'''
+# Custom spacing - Black handles this through its default behavior
+# One-liners stay together, multi-line statements get spaced
+skip-string-normalization = false
 

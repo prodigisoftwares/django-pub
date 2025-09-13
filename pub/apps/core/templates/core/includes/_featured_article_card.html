@@ -1,4 +1,5 @@
 {% load markdown_extras %}
+
 <article class="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 rounded-2xl p-8 lg:p-12 text-white relative overflow-hidden group {{ extra_classes }}">
   <div class="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
   </div>
@@ -7,24 +8,30 @@
       <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
         {{ badge_text|default:"Featured Article" }}
       </span>
+
       {% if show_metadata %}
+
         <span class="ml-4 text-gray-300 flex items-center">
           {% include "articles/time_ago_published.html" with instance=article %}
           <span class="mx-2">•</span>
           {% include "core/shared/reading_length.html" with instance=article %}
         </span>
       {% endif %}
+
     </div>
     <h2 class="text-3xl lg:text-4xl font-bold mb-6 leading-tight">
       <a href="{{ article_url|default:'' }}"
          class="link-featured hover:text-gray-200 transition-colors">{{ article.title }}</a>
     </h2>
     <p class="text-xl text-gray-200 mb-8 leading-relaxed">
+
       {% if article.summary %}
+
         {{ article.summary|markdown_to_text|truncatewords:30 }}
       {% else %}
         {{ article.content|markdown_to_text|truncatewords:30 }}
       {% endif %}
+
     </p>
     <a href="{{ article_url|default:'' }}"
        class="btn-view-all bg-white/10 text-white border border-white/20 hover:bg-white/20 group">
@@ -33,7 +40,8 @@
            fill="none"
            stroke="currentColor"
            viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3">
+        </path>
       </svg>
     </a>
   </div>

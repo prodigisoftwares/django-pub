@@ -1,31 +1,32 @@
 .markdownx-editor {
-    display: flex !important;
-    background: #111827 !important;
-    gap: 12px !important;
-    padding: 12px !important;
-    width: 100% !important;
+  display: flex !important;
+  background: #111827 !important;
+  gap: 12px !important;
+  padding: 12px !important;
+  width: 100% !important;
 }
 
-.markdownx, .markdownx-preview {
-    flex: 1 !important;
-    min-height: 300px !important;
-    border: 1px solid #4b5563 !important;
-    border-radius: 4px !important;
-    font-size: 15px !important;
+.markdownx,
+.markdownx-preview {
+  flex: 1 !important;
+  min-height: 300px !important;
+  border: 1px solid #4b5563 !important;
+  border-radius: 4px !important;
+  font-size: 15px !important;
 }
 
 .markdownx {
-    padding: 16px !important;
-    background: #1f2937 !important;
-    color: #f3f4f6 !important;
-    width: 60% !important;
+  padding: 16px !important;
+  background: #1f2937 !important;
+  color: #f3f4f6 !important;
+  width: 60% !important;
 }
 
 .markdownx-preview {
-    padding: 12px !important;
-    background: #f3f4f6 !important;
-    color: #111827 !important;
-    overflow-y: auto !important;
-    margin-top: 20px !important;
-    width: 100% !important;
+  padding: 12px !important;
+  background: #f3f4f6 !important;
+  color: #111827 !important;
+  overflow-y: auto !important;
+  margin-top: 20px !important;
+  width: 100% !important;
 }
