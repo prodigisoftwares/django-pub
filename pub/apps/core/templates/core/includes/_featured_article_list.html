@@ -1,4 +1,5 @@
 {% for article in articles|slice:"1:7" %}
+
   <article class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg hover:border-gray-300 transition-all duration-200 group">
     {% include "core/includes/_article_metadata.html" with article=article extra_classes="mb-3" %}
     {% include "articles/article_listing.html" with article=article article_heading_class="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-gray-700 transition-colors" article_link_class="link-article" article_summary_class="text-gray-600 mb-4 leading-relaxed" %}
@@ -9,12 +10,15 @@
            fill="none"
            stroke="currentColor"
            viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+        </path>
       </svg>
     </a>
   </article>
 {% empty %}
   <div class="col-span-full text-center text-gray-500">
-    <p>No additional articles available.</p>
+    <p>
+      No additional articles available.
+    </p>
   </div>
 {% endfor %}
